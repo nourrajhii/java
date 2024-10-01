@@ -1,3 +1,8 @@
+package tn.esprit.gestionzoo.main;
+
+import tn.esprit.gestionzoo.entities.Animal;
+import tn.esprit.gestionzoo.entities.ZOO;
+
 public class ZooManagement {
     public static void main(String[] args) {
         // Création de quelques animaux
@@ -11,10 +16,10 @@ public class ZooManagement {
         ZOO myZoo2 = new ZOO("Wild Park", "Sousse");
 
         // Ajout des animaux dans les zoos
-        myZoo1.addAnimal(lion);      // Ajoute le lion dans le premier zoo
-        myZoo1.addAnimal(tiger);     // Ajoute le tigre dans le premier zoo
-        myZoo2.addAnimal(elephant);  // Ajoute l'éléphant dans le deuxième zoo
-        myZoo2.addAnimal(zebra);     // Ajoute le zèbre dans le deuxième zoo
+        myZoo1.addAnimal(lion);
+        myZoo1.addAnimal(tiger);
+        myZoo2.addAnimal(elephant);
+        myZoo2.addAnimal(zebra);
 
         // Affichage des animaux de chaque zoo
         System.out.println("\nAnimaux dans le zoo 1 :");
@@ -24,12 +29,12 @@ public class ZooManagement {
         myZoo2.displayAnimals();
 
         // Suppression d'un animal
-        myZoo1.removeAnimal(lion); // Supprimer le lion du zoo 1
+        myZoo1.removeAnimal(lion);
 
         // Comparaison des zoos
         ZOO largerZoo = ZOO.comparerZoo(myZoo1, myZoo2);
         if (largerZoo != null) {
-            System.out.println("\nLe zoo avec le plus d'animaux est : " + largerZoo.name);
+            System.out.println("\nLe zoo avec le plus d'animaux est : " + largerZoo.getName());
         }
 
         // Affichage des informations du zoo

@@ -1,16 +1,49 @@
+package tn.esprit.gestionzoo.entities;
+
 public class ZOO {
     private final int nbrCages = 25; // Nombre maximum d'animaux dans le zoo
-    Animal[] animals;
-    String name;
-    String city;
-    int animalCount; // Compteur pour le nombre d'animaux ajoutés
+    private Animal[] animals;
+    private String name;
+    private String city;
+    private int animalCount; // Compteur pour le nombre d'animaux ajoutés
 
-    // Constructeur
+    // Constructor
     public ZOO(String name, String city) {
-        this.animals = new Animal[nbrCages]; // Zoo avec un maximum de 25 animaux
-        this.name = name;
+        this.setName(name); // Validate zoo name using setter
         this.city = city;
+        this.animals = new Animal[nbrCages]; // Zoo avec un maximum de 25 animaux
         this.animalCount = 0; // Initialiser le compteur d'animaux à 0
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getAnimalCount() {
+        return animalCount;
+    }
+
+    public int getNbrCages() {
+        return nbrCages;
+    }
+
+    // Setters
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Erreur : Le nom du zoo ne peut pas être vide.");
+            this.name = "Zoo sans nom"; // Default name if the input is invalid
+        } else {
+            this.name = name;
+        }
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     // Méthode pour ajouter un animal dans le zoo
@@ -22,8 +55,8 @@ public class ZOO {
 
         // Vérifier si l'animal existe déjà dans le zoo
         for (int i = 0; i < animalCount; i++) {
-            if (animals[i].name.equals(animal.name)) {
-                System.out.println("Erreur : L'animal " + animal.name + " existe déjà dans le zoo.");
+            if (animals[i].getName().equals(animal.getName())) {
+                System.out.println("Erreur : L'animal " + animal.getName() + " existe déjà dans le zoo.");
                 return false;
             }
         }
@@ -31,25 +64,25 @@ public class ZOO {
         // Ajouter l'animal s'il est unique et qu'il reste de la place
         animals[animalCount] = animal;
         animalCount++; // Incrémenter le compteur d'animaux
-        System.out.println("L'animal " + animal.name + " a été ajouté au zoo.");
+        System.out.println("L'animal " + animal.getName() + " a été ajouté au zoo.");
         return true;
     }
 
     // Méthode pour supprimer un animal du zoo
     public boolean removeAnimal(Animal animal) {
         for (int i = 0; i < animalCount; i++) {
-            if (animals[i].name.equals(animal.name)) {
+            if (animals[i].getName().equals(animal.getName())) {
                 // Décaler tous les animaux suivants d'une case vers la gauche
                 for (int j = i; j < animalCount - 1; j++) {
                     animals[j] = animals[j + 1];
                 }
                 animals[animalCount - 1] = null; // Supprimer le dernier animal
                 animalCount--; // Décrémenter le compteur d'animaux
-                System.out.println("L'animal " + animal.name + " a été supprimé du zoo.");
+                System.out.println("L'animal " + animal.getName() + " a été supprimé du zoo.");
                 return true;
             }
         }
-        System.out.println("Erreur : L'animal " + animal.name + " n'a pas été trouvé dans le zoo.");
+        System.out.println("Erreur : L'animal " + animal.getName() + " n'a pas été trouvé dans le zoo.");
         return false;
     }
 
@@ -71,7 +104,7 @@ public class ZOO {
     // Méthode pour rechercher un animal par nom dans le zoo
     public int searchAnimal(Animal animal) {
         for (int i = 0; i < animalCount; i++) {
-            if (animals[i].name.equals(animal.name)) {
+            if (animals[i].getName().equals(animal.getName())) {
                 return i; // Retourne l'indice si l'animal est trouvé
             }
         }
@@ -85,9 +118,9 @@ public class ZOO {
 
     // Méthode pour comparer deux zoos et renvoyer celui avec le plus d'animaux
     public static ZOO comparerZoo(ZOO z1, ZOO z2) {
-        if (z1.animalCount > z2.animalCount) {
+        if (z1.getAnimalCount() > z2.getAnimalCount()) {
             return z1;
-        } else if (z2.animalCount > z1.animalCount) {
+        } else if (z2.getAnimalCount() > z1.getAnimalCount()) {
             return z2;
         } else {
             System.out.println("Les deux zoos ont le même nombre d'animaux.");
